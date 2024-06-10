@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from controllers.conversions import seconds2hours
+from controllers.conversions import seconds2days
 
 ctk.set_appearance_mode('dark')
 ctk.set_default_color_theme('blue')
@@ -30,24 +30,29 @@ class App(ctk.CTk):
         self.convertbutton.configure(font=('Helvetica', 20, 'bold'), command=self.convert, corner_radius=50)
         self.convertbutton.grid(row=2, column=0, columnspan=2, sticky='ew', padx=(50, 50), pady=20)
 
+        self.daysdisplay = ctk.CTkLabel(self.mainframe, text='Hours: ')
+        self.daysdisplay.configure(font=('Helvetica', 30, 'bold'))
+        self.daysdisplay.grid(row=3, column=0, padx=20, pady=(3, 3), columnspan=2)
+
         self.hoursdisplay = ctk.CTkLabel(self.mainframe, text='Hours: ')
         self.hoursdisplay.configure(font=('Helvetica', 30, 'bold'))
-        self.hoursdisplay.grid(row=3, column=0, padx=20, pady=(3, 3), columnspan=2)
+        self.hoursdisplay.grid(row=4, column=0, padx=20, pady=(3, 3), columnspan=2)
 
         self.minutesdisplay = ctk.CTkLabel(self.mainframe, text='Minutes: ')
         self.minutesdisplay.configure(font=('Helvetica', 30, 'bold'))
-        self.minutesdisplay.grid(row=4, column=0, padx=20, pady=(3, 3), columnspan=2)
+        self.minutesdisplay.grid(row=5, column=0, padx=20, pady=(3, 3), columnspan=2)
 
         self.secondsdisplay = ctk.CTkLabel(self.mainframe, text='Seconds: ')
         self.secondsdisplay.configure(font=('Helvetica', 30, 'bold'))
-        self.secondsdisplay.grid(row=5, column=0, padx=20, pady=(3, 20), columnspan=2)
+        self.secondsdisplay.grid(row=6, column=0, padx=20, pady=(3, 20), columnspan=2)
 
     def convert(self):
         time: str = self.inputsecondsentry.get()
         seconds: int = int(time)
-        self.answer: list[int] = seconds2hours(seconds)
+        self.answer: list[int] = seconds2days(seconds)
         [print(num, end=' ') for num in self.answer]
         print()
-        self.hoursdisplay.configure(text=f'Hours: {self.answer[0]}')
-        self.minutesdisplay.configure(text=f'Minutes: {self.answer[1]}')
-        self.secondsdisplay.configure(text=f'Seconds: {self.answer[2]}')
+        self.daysdisplay.configure(text=f'Days: {self.answer[0]}')
+        self.hoursdisplay.configure(text=f'Hours: {self.answer[1]}')
+        self.minutesdisplay.configure(text=f'Minutes: {self.answer[2]}')
+        self.secondsdisplay.configure(text=f'Seconds: {self.answer[3]}')
