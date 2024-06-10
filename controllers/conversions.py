@@ -1,4 +1,5 @@
 import numpy as np
+import setuptools
 
 
 def seconds2hours(seconds: int) -> list[int]:
